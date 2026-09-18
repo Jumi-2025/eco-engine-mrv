@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: eco-engine-mrv-demo
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+# Demonstration only: free service storage is ephemeral.
+# Do not upload private records. The current prototype has no enforced authentication.
