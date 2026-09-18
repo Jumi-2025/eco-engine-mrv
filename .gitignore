@@ -1,0 +1,11 @@
+node_modules/
+data/
+uploads/
+.test-data/
+.test-uploads/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
