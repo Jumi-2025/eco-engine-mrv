@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECO-ENGINE | Digital MRV Platform (Nigeria Climate Data Rails)</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+  <!-- Top Regulatory Strip -->
+  <div class="regulatory-strip">
+    <div>
+      <strong>NUPRC MRV MANDATE COMPLIANT</strong> &bull; IPCC Tier 2 Factors &bull; Upstream O&amp;G &amp; Industrial Baseline
+    </div>
+    <div>
+      National Grid Baseline: <code>NG-GRID CO2e: 0.438 kg/kWh</code> | Rev: 2024.Q4
+    </div>
+  </div>
+
+  <!-- Global Application Shell: Left Sidebar + Main Content Area -->
+  <div class="app-shell">
+
+    <!-- LEFT SIDEBAR NAVIGATION (6 Items per SCREEN_SPECIFICATION.md) -->
+    <aside class="app-sidebar">
+      <div class="sidebar-brand" id="brand-home-btn">
+        <div class="brand-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-title-wrap">
+          <h1>ECO-ENGINE</h1>
+          <div class="brand-sub">CLIMATE DATA RAILS</div>
+        </div>
+      </div>
+
+      <!-- Navigation Rail: 6 spec screens -->
+      <nav class="sidebar-nav">
+        <!-- Screen 1: Dashboard -->
+        <button class="sidebar-nav-item active" data-view="view-dashboard">
+          <div class="nav-icon-text">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span>Dashboard</span>
+          </div>
+        </button>
+
+        <!-- Screen 2: Data Intake -->
+        <button class="sidebar-nav-item" data-view="view-intake">
+          <div class="nav-icon-text">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="12" y1="18" x2="12" y2="12"></line>
+              <line x1="9" y1="15" x2="15" y2="15"></line>
+            </svg>
+            <span>Data Intake</span>
+          </div>
+          <span class="sidebar-pill-badge" id="sidebar-pending-badge">0 Gate</span>
+        </button>
+
+        <!-- Screen 3: Emissions Compiler -->
+        <button class="sidebar-nav-item" data-view="view-compiler">
+          <div class="nav-icon-text">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            <span>Emissions Compiler</span>
+          </div>
+        </button>
+
+        <!-- Screen 4: Verification Queue (Next Increment) -->
+        <button class="sidebar-nav-item" data-view="view-verification">
+          <div class="nav-icon-text">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 11l3 3L22 4"></path>
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+            </svg>
+            <span>Verification Queue</span>
+          </div>
+          <span class="sidebar-pill-badge">Next Inc.</span>
+        </button>
+
+        <!-- Screen 5: Audit Trail -->
+        <button class="sidebar-nav-item" data-view="view-audit">
+          <div class="nav-icon-text">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>Audit Trail</span>
+          </div>
+          <span class="sidebar-pill-badge" id="sidebar-audit-badge">0 Logs</span>
+        </button>
+
+        <!-- Screen 6: Regulator Reports (Next Increment) -->
+        <button class="sidebar-nav-item" data-view="view-reports">
+          <div class="nav-icon-text">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <path d="M16 13H8"></path>
+              <path d="M16 17H8"></path>
+              <path d="M10 9H8"></path>
+            </svg>
+            <span>Regulator Reports</span>
+          </div>
+          <span class="sidebar-pill-badge">Next Inc.</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div><strong>ECO-ENGINE MRV Platform</strong></div>
+        <div>NUPRC Mandate Compliance Rails</div>
+      </div>
+    </aside>
+
+    <!-- RIGHT CONTENT AREA -->
+    <div class="app-main-area">
+
+      <!-- TOP BAR (SCREEN_SPECIFICATION.md: Facility selector, role badge, notifications) -->
+      <header class="app-topbar">
+        <div class="topbar-left">
+          <div class="facility-selector-wrap">
+            <span class="facility-selector-label">Facility:</span>
+            <select class="facility-dropdown" id="topbar-facility-dropdown">
+              <option value="">Loading facilities...</option>
+            </select>
+          </div>
+
+          <!-- Standardized Status Chip (Gray = Draft, Gold = In Review, Deep Green = Verified) -->
+          <span class="status-chip status-chip-draft" id="topbar-status-chip">Draft</span>
+          <span class="meta-pill" style="background: #eaf7e9; color: #1F4E2C; font-weight:700;" id="topbar-period-chip">Q3 2026</span>
+        </div>
+
+        <div class="topbar-right">
+          <!-- User Role Badge -->
+          <div class="role-badge">
+            <span>Role:</span>
+            <select id="user-role-select">
+              <option value="Operator (HSE Lead)">Operator (HSE Lead)</option>
+              <option value="Independent Verifier">Independent Verifier</option>
+              <option value="System Admin">System Admin</option>
+            </select>
+          </div>
+
+          <!-- Audit Ledger Shortcut Button -->
+          <button class="btn btn-secondary btn-sm" id="btn-quick-audit-drawer" title="View cryptographic audit log">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span>Ledger</span>
+          </button>
+
+          <!-- Notifications Icon -->
+          <button class="btn-notifications" id="btn-notifications" title="System Alerts">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="notif-badge-dot" id="notif-dot" style="display: none;"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- MAIN VIEWPORT CONTENT -->
+      <main class="main-content-view">
+
+        <!-- Degraded State Banner (F2 Simulation) -->
+        <div class="alert-banner alert-warning" id="degraded-system-banner" style="display: none;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink: 0;">
+            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0zM12 9v4M12 17h.01"/>
+          </svg>
+          <div>
+            <strong>AI Extraction Service Unavailable (F2 Simulation):</strong>
+            <div>Extraction is queued as <em>"Extraction pending — will retry"</em>. You can continue without blocking using the <strong>Manual Entry Fallback</strong>.</div>
+          </div>
+        </div>
+
+        <!-- ======================================================= -->
+        <!-- SCREEN 1: DASHBOARD (/dashboard)                         -->
+        <!-- ======================================================= -->
+        <section class="view-section active-view" id="view-dashboard">
+          <div class="page-header">
+            <div>
+              <span class="page-overline">PORTFOLIO OVERVIEW &bull; SCREEN 1</span>
+              <h2>Operator MRV Dashboard</h2>
+              <p class="page-subtitle">Measurement, reporting, and verification posture for Nigerian industrial assets facing the Q3 2026 NUPRC directive.</p>
+            </div>
+            <button class="btn btn-primary" id="btn-create-facility-dash">
+              <span>+ Register New Facility</span>
+            </button>
+          </div>
+
+          <!-- Empty State (Start Screen Verified per Definition of Done) -->
+          <div class="empty-state-box" id="dashboard-empty-state" style="display: none;">
+            <div class="empty-state-icon">
+              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M3 21h18M5 21V7l8-4v18M13 21V3l6 3v15"/>
+              </svg>
+            </div>
+            <h3 class="serif-heading empty-state-title">Create your first facility</h3>
+            <p class="empty-state-text">
+              No industrial facility registered yet. Setup your facility profile, physical boundaries, and designated reporting period (Q3 2026) to begin your traceable MRV journey.
+            </p>
+            <button class="btn btn-primary" id="btn-empty-start-facility">
+              <span>+ Create Your First Facility</span>
+            </button>
+          </div>
+
+          <!-- Dashboard Populated Content -->
+          <div id="dashboard-content-container" style="display: none;">
+
+            <!-- KPI Row (4 Cards per SCREEN_SPECIFICATION.md) -->
+            <div class="kpi-row">
+              <div class="kpi-card">
+                <span class="kpi-label">Total tCO₂e This Period</span>
+                <div class="kpi-value tabular-nums" id="kpi-total-emissions">0.00</div>
+                <span class="kpi-meta">IPCC Tier 2 deterministic sum</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">Facilities Reporting</span>
+                <div class="kpi-value tabular-nums" id="kpi-facilities-count">0</div>
+                <span class="kpi-meta" id="kpi-facilities-sub">Active industrial assets</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">Reports by Status</span>
+                <div style="display: flex; gap: 8px; margin-top: 6px;">
+                  <span class="status-chip status-chip-draft" id="kpi-status-draft">0 Draft</span>
+                  <span class="status-chip status-chip-review" id="kpi-status-review">0 Review</span>
+                  <span class="status-chip status-chip-verified" id="kpi-status-verified">0 Verified</span>
+                </div>
+                <span class="kpi-meta" style="margin-top: 8px;">NUPRC reporting cycles</span>
+              </div>
+              <div class="kpi-card">
+                <span class="kpi-label">Data Completeness</span>
+                <div class="kpi-value tabular-nums" id="kpi-completeness">100%</div>
+                <span class="kpi-meta" id="kpi-completeness-meta">All human gates resolved</span>
+              </div>
+            </div>
+
+            <!-- Alerts Panel (SCREEN_SPECIFICATION.md: unapproved extractions, missing data, etc.) -->
+            <div class="card" id="dashboard-alerts-card" style="display: none; border-color: var(--warning-border); background: #fffcf5;">
+              <div class="card-header-row" style="margin-bottom: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span class="status-chip status-chip-review">Active Alerts</span>
+                  <h4 style="font-size: 13.5px; font-weight: 700; color: var(--warning-text);">Immediate Action Required</h4>
+                </div>
+              </div>
+              <div id="dashboard-alerts-list">
+                <!-- Dynamically populated with clickable alert rows -->
+              </div>
+            </div>
+
+            <!-- Facility Roster Card -->
+            <div class="card">
+              <div class="card-header-row">
+                <div>
+                  <h3>Reporting Operational Assets</h3>
+                  <p style="font-size: 13px; color: var(--text-muted);">Select a facility to open its Data Intake and Emissions Compiler workspace.</p>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>Facility Name</th>
+                      <th>Classification</th>
+                      <th>Jurisdiction</th>
+                      <th>Reporting Period</th>
+                      <th>Status</th>
+                      <th>Calculated tCO₂e</th>
+                      <th>Human Gates</th>
+                      <th style="text-align: right;">Workspace Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashboard-facilities-tbody">
+                    <!-- Populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- SCREEN 2: DATA INTAKE & SPLIT VIEW HERO (Operator)      -->
+        <!-- ======================================================= -->
+        <section class="view-section" id="view-intake">
+          <div class="page-header">
+            <div>
+              <span class="page-overline">DATA INTAKE &bull; SCREEN 2</span>
+              <h2>Evidence Intake &amp; Human Approval Gate</h2>
+              <p class="page-subtitle">
+                <strong>"The AI accelerates. The human decides."</strong> Upload raw records (PDF, CSV, PNG, JPG) and inspect extractions side-by-side with source documents. Every figure requires human approval.
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-secondary btn-sm" id="btn-intake-manual-entry">
+                <span>+ Manual Entry Fallback (E4/F2)</span>
+              </button>
+              <button class="btn btn-primary btn-sm" id="btn-proceed-to-compiler-hero">
+                <span>Proceed to Compiler &rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Progress Indicator: "X of Y extractions approved" (SCREEN_SPECIFICATION.md requirement) -->
+          <div class="intake-progress-bar">
+            <div>
+              <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: block;">GATE PROGRESS</span>
+              <strong style="font-size: 14px; color: var(--primary-deep);" id="intake-progress-text">0 of 0 extractions approved (0%)</strong>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <div class="status-chip status-chip-draft" id="intake-pending-count-chip">0 Awaiting Approval</div>
+              <button class="btn btn-secondary btn-sm" id="btn-trigger-ai-batch">
+                <span>Trigger AI Extraction &rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Seed & Simulation Bar -->
+          <div class="card" style="padding: 12px 18px; margin-bottom: 20px; background: #fafdfa;">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 12px; font-weight: 700; color: var(--primary-deep); text-transform: uppercase;">Quick Operational Fixtures:</span>
+                <button class="btn btn-secondary btn-sm" id="btn-seed-intake-files">
+                  <span>Load 4 Operational Records</span>
+                </button>
+                <button class="btn btn-secondary btn-sm" id="btn-seed-unreadable-intake">
+                  <span>+ Unreadable Scan (E4)</span>
+                </button>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 14px; font-size: 12px;">
+                <span style="font-weight: 600; color: var(--text-secondary);">Failure Recovery:</span>
+                <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                  <input type="checkbox" id="chk-intake-drop">
+                  <span>Simulate Upload Drop (F1)</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 5px; cursor: pointer;">
+                  <input type="checkbox" id="chk-intake-degraded">
+                  <span>Simulate AI Outage (F2)</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upload Dropzone -->
+          <div class="card" style="margin-bottom: 20px;">
+            <div class="upload-dropzone" id="upload-dropzone">
+              <div class="dropzone-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                </svg>
+              </div>
+              <h4 style="font-size: 14px; margin-bottom: 4px;">Drag and drop evidence files here</h4>
+              <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+                Accepted formats: <strong>PDF, CSV, PNG, JPG</strong> (E3 rejects .zip, .exe)
+              </p>
+              <input type="file" id="file-input-control" multiple accept=".pdf,.csv,.png,.jpg,.jpeg" style="display: none;">
+              <button class="btn btn-secondary btn-sm" id="btn-browse-files">Browse Local Files</button>
+            </div>
+            <div id="upload-status-alert" style="margin-top: 12px;"></div>
+          </div>
+
+          <!-- SPLIT VIEW HERO COMPONENT (SCREEN_SPECIFICATION.md requirement) -->
+          <div class="intake-split-view">
+
+            <!-- Left Panel: Evidence Document Preview -->
+            <div class="split-left-panel">
+              <div class="card" style="height: 100%; display: flex; flex-direction: column;">
+                <div class="card-header-row" style="margin-bottom: 12px;">
+                  <div>
+                    <h3 style="font-size: 1.05rem;">Source Document Preview</h3>
+                    <div style="font-size: 11px; color: var(--text-muted);" id="preview-active-filename">No document selected</div>
+                  </div>
+                  <span class="status-chip status-chip-draft" id="preview-active-status">Select File</span>
+                </div>
+
+                <!-- Simulated PDF/CSV Viewer Window -->
+                <div class="doc-preview-screen" id="doc-preview-screen">
+                  <div style="text-align: center; padding: 40px 20px; color: var(--text-muted);">
+                    Select an evidence record from the list or upload new records to inspect the text layer and extracted values side-by-side.
+                  </div>
+                </div>
+
+                <!-- Evidence Files List Quick Switcher -->
+                <div style="margin-top: 14px;">
+                  <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 6px;">Facility Evidence Roster:</span>
+                  <div id="evidence-roster-chips" style="display: flex; flex-wrap: wrap; gap: 6px; max-height: 90px; overflow-y: auto;">
+                    <!-- Populated dynamically -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Panel: Extracted Fields with 3-tier Confidence Bar & Actions -->
+            <div class="split-right-panel">
+              <div class="card" style="height: 100%; display: flex; flex-direction: column;">
+                <div class="card-header-row" style="margin-bottom: 12px;">
+                  <div>
+                    <h3 style="font-size: 1.05rem;">AI Extraction Approval Gate</h3>
+                    <p style="font-size: 12px; color: var(--text-muted);">Approve, Edit, or Return each field. Unapproved extractions block submission (E7).</p>
+                  </div>
+                  <div style="display: flex; gap: 6px; font-size: 11px;">
+                    <span style="color: #10b981; font-weight: 700;">&bull; &ge;90% Auto</span>
+                    <span style="color: #f59e0b; font-weight: 700;">&bull; 70-89% Review</span>
+                    <span style="color: #ef4444; font-weight: 700;">&bull; &lt;70% Flag</span>
+                  </div>
+                </div>
+
+                <!-- Extracted Items Container -->
+                <div id="extractions-cards-container" style="flex: 1; overflow-y: auto; max-height: 620px;">
+                  <!-- Dynamically populated with individual extraction cards -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- SCREEN 3: EMISSIONS COMPILER (/compiler)                 -->
+        <!-- ======================================================= -->
+        <section class="view-section" id="view-compiler">
+          <div class="page-header">
+            <div>
+              <span class="page-overline">DETERMINISTIC ENGINE &bull; SCREEN 3</span>
+              <h2>Emissions Compiler (IPCC Tier 2 Rules-Based)</h2>
+              <p class="page-subtitle">
+                Deterministic calculations only (Activity &times; Versioned Factor). Zero AI-generated figures. Every figure links to source document, factor version, and exact formula.
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-secondary btn-sm" id="btn-recalculate-engine" title="Always creates a new calculation version (F3)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                </svg>
+                <span>Recalculate (New Version F3)</span>
+              </button>
+              <button class="btn btn-primary btn-sm" id="btn-compiler-proceed-submit">
+                <span>Submit for Review &rarr;</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Traceability Banner (SCREEN_SPECIFICATION.md requirement) -->
+          <div class="traceability-banner">
+            &check; Every figure on this screen is reproducible from its source document and versioned emission factor.
+          </div>
+
+          <!-- Incomplete Sources Panel (E5 & E6 alerts) -->
+          <div id="compiler-fault-banners"></div>
+
+          <!-- Hero Ledger Card -->
+          <div class="ledger-hero-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <h3>Gross Facility Emissions Inventory</h3>
+                <div class="emissions-big-number tabular-nums" id="hero-total-emissions">0.0000 <span style="font-size: 1.4rem; font-weight: 400;">tCO₂e</span></div>
+                <div class="emissions-sub-number" id="hero-scope-breakdown">Scope 1 Direct: 0.0000 tCO₂e | Scope 2 Grid: 0.0000 tCO₂e</div>
+              </div>
+              <div style="text-align: right;">
+                <span class="status-chip status-chip-review" id="calc-version-badge">Version 0</span>
+                <div style="margin-top: 10px;">
+                  <button class="btn btn-accent btn-sm" id="btn-run-calculation">
+                    <span>Run Calculation Engine</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Distribution Bar -->
+            <div class="distribution-bar">
+              <div class="dist-segment dist-gas" style="width: 0%;" id="bar-gas"></div>
+              <div class="dist-segment dist-flare" style="width: 0%;" id="bar-flare"></div>
+              <div class="dist-segment dist-diesel" style="width: 0%;" id="bar-diesel"></div>
+              <div class="dist-segment dist-grid" style="width: 0%;" id="bar-grid"></div>
+            </div>
+
+            <div class="dist-legend">
+              <div class="dist-legend-item">
+                <span class="legend-dot" style="background-color: #61b17b;"></span>
+                <span>Natural Gas (<span id="pct-gas">0%</span>)</span>
+              </div>
+              <div class="dist-legend-item">
+                <span class="legend-dot" style="background-color: var(--accent-gold);"></span>
+                <span>Routine Flaring (<span id="pct-flare">0%</span>)</span>
+              </div>
+              <div class="dist-legend-item">
+                <span class="legend-dot" style="background-color: #38a169;"></span>
+                <span>Diesel Gensets (<span id="pct-diesel">0%</span>)</span>
+              </div>
+              <div class="dist-legend-item">
+                <span class="legend-dot" style="background-color: #d69e2e;"></span>
+                <span>DisCo Grid (<span id="pct-grid">0%</span>)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scope Tabs (SCREEN_SPECIFICATION.md requirement: Scope 1 / Scope 2 / Scope 3) -->
+          <div class="scope-tabs-bar">
+            <button class="scope-tab-btn active" data-scope="all">All Scopes</button>
+            <button class="scope-tab-btn" data-scope="Scope 1">Scope 1 Direct (Combustion &amp; Flaring)</button>
+            <button class="scope-tab-btn" data-scope="Scope 2">Scope 2 Location-Based (DisCo Grid)</button>
+            <button class="scope-tab-btn" data-scope="Scope 3">Scope 3 Value Chain (N/A MVP)</button>
+          </div>
+
+          <!-- Calculation Table per Source (DoD Requirement) -->
+          <div class="card">
+            <div class="card-header-row">
+              <div>
+                <h3>Source Attribution &amp; Mathematical Traceability</h3>
+                <p style="font-size: 12.5px; color: var(--text-muted);">
+                  Every displayed figure links to source document, factor version, and calculation formula.
+                </p>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Source Document</th>
+                    <th>Activity Data</th>
+                    <th>Factor Version &amp; Standard</th>
+                    <th>Scope</th>
+                    <th>Deterministic Formula</th>
+                    <th>Emissions</th>
+                    <th>Human Gate Sign-Off</th>
+                  </tr>
+                </thead>
+                <tbody id="calculation-sources-tbody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- SCREEN 4: VERIFICATION QUEUE (Verifier) — PLACEHOLDER   -->
+        <!-- ======================================================= -->
+        <section class="view-section" id="view-verification">
+          <div class="placeholder-view-card">
+            <span class="placeholder-badge">NEXT INCREMENT &bull; SCREEN 4</span>
+            <h2>Verification Review Queue</h2>
+            <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto 24px;">
+              Per Day-3 Scope and Handoff briefing, independent verifier workflows (anomaly resolution checklist, mandatory comments on change requests E9, and final sign-off blocks) will be implemented in the next increment.
+            </p>
+
+            <div style="border: 1px dashed var(--surface-border); background: var(--surface-low); padding: 24px; border-radius: var(--radius-md); max-width: 580px; margin: 0 auto; text-align: left; font-size: 13px;">
+              <strong>Blueprint Components in Spec:</strong>
+              <ul style="margin-left: 20px; margin-top: 8px; line-height: 1.7; color: var(--text-secondary);">
+                <li>Queue table: facility &bull; period &bull; submission date &bull; anomaly count &bull; assigned verifier &bull; status</li>
+                <li>Detail panel: flagged anomalies list linking to evidence; reviewer checklist (all items required)</li>
+                <li>Verdict actions: <strong>Approve / Request changes (mandatory comment E9) / Reject</strong></li>
+                <li>Sign-off block: verifier name, timestamp, report version</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- SCREEN 5: AUDIT TRAIL (/audit) — DEDICATED SCREEN       -->
+        <!-- ======================================================= -->
+        <section class="view-section" id="view-audit">
+          <div class="page-header">
+            <div>
+              <span class="page-overline">IMMUTABLE LOG &bull; SCREEN 5</span>
+              <h2>Cryptographic Audit Ledger</h2>
+              <p class="page-subtitle">
+                Append-only, hash-linked record of every state transition. Proves traceability from source document through human approval to versioned calculation and submission.
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-secondary btn-sm" id="btn-export-audit-csv">
+                <span>Export Audit CSV</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Filters Bar -->
+          <div class="card" style="padding: 14px 20px; margin-bottom: 20px;">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px;">
+              <div>
+                <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Filter Action:</span>
+                <select id="audit-filter-action" class="form-select" style="padding: 4px 10px; font-size: 12px; width: auto; display: inline-block; margin-left: 6px;">
+                  <option value="">All Actions</option>
+                  <option value="FACILITY_CREATED">Facility Created</option>
+                  <option value="EVIDENCE_UPLOADED">Evidence Uploaded</option>
+                  <option value="EXTRACTION_APPROVED">Extraction Approved</option>
+                  <option value="EXTRACTION_EDITED">Extraction Edited</option>
+                  <option value="EXTRACTION_RETURNED">Extraction Returned</option>
+                  <option value="CALCULATION_RUN">Calculation Run</option>
+                  <option value="SUBMITTED_FOR_REVIEW">Submitted for Review</option>
+                </select>
+              </div>
+
+              <div>
+                <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Actor Role:</span>
+                <select id="audit-filter-role" class="form-select" style="padding: 4px 10px; font-size: 12px; width: auto; display: inline-block; margin-left: 6px;">
+                  <option value="">All Roles</option>
+                  <option value="operator">Operator</option>
+                  <option value="system">System / AI</option>
+                </select>
+              </div>
+
+              <div style="margin-left: auto; font-size: 12px; color: var(--text-muted);" id="audit-logs-count-text">
+                0 total events recorded
+              </div>
+            </div>
+          </div>
+
+          <!-- Audit Timeline Table (SCREEN_SPECIFICATION.md requirement) -->
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>Actor (Name + Role)</th>
+                    <th>Action</th>
+                    <th>Object / Details</th>
+                    <th>Cryptographic Hash Link (SHA-256)</th>
+                  </tr>
+                </thead>
+                <tbody id="audit-table-screen-tbody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- SCREEN 6: REGULATOR REPORTS — PLACEHOLDER               -->
+        <!-- ======================================================= -->
+        <section class="view-section" id="view-reports">
+          <div class="placeholder-view-card">
+            <span class="placeholder-badge">NEXT INCREMENT &bull; SCREEN 6</span>
+            <h2>Regulator-Ready Report Generator</h2>
+            <p style="color: var(--text-secondary); max-width: 650px; margin: 0 auto 24px;">
+              Per Day-3 Scope and Handoff briefing, NUPRC statutory template report compilation, executive PDF/Excel exports, and regulator read-only portals will be implemented in the next increment.
+            </p>
+
+            <div style="border: 1px dashed var(--surface-border); background: var(--surface-low); padding: 24px; border-radius: var(--radius-md); max-width: 580px; margin: 0 auto; text-align: left; font-size: 13px;">
+              <strong>Blueprint Components in Spec:</strong>
+              <ul style="margin-left: 20px; margin-top: 8px; line-height: 1.7; color: var(--text-secondary);">
+                <li>NUPRC template output (PDF/Excel) with sign-off block (E10)</li>
+                <li>Verified periods lock notice: corrections become linked amendment versions (U2)</li>
+                <li>Regulator portal manual export/submission flow (U4)</li>
+                <li>Generation error recovery with retry action (F8)</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================================= -->
+        <!-- VIEW: SUBMIT FOR REVIEW (Gated Workflow)                -->
+        <!-- ======================================================= -->
+        <section class="view-section" id="view-submit">
+          <div class="page-header">
+            <div>
+              <span class="page-overline">SUBMISSION GATE &bull; STEP 05</span>
+              <h2>Submit Facility Inventory for Verification</h2>
+              <p class="page-subtitle">
+                Transition facility status from <code>Draft / Open</code> to <code>In review</code>. Gated strictly: report cannot be submitted while any extraction is unapproved (E7).
+              </p>
+            </div>
+          </div>
+
+          <div class="card" style="max-width: 780px; margin: 0 auto;">
+            <div class="card-header-row">
+              <h3>Pre-Submission Integrity Checklist</h3>
+              <span class="status-chip status-chip-draft" id="submit-current-status-chip">Draft</span>
+            </div>
+
+            <div id="submit-validation-container" style="margin-bottom: 24px;">
+              <!-- Dynamically Populated with Checklist / Blocking Banner -->
+            </div>
+
+            <div style="background: var(--surface-low); padding: 18px; border-radius: var(--radius-md); border: 1px solid var(--surface-border); margin-bottom: 24px;">
+              <h4 style="font-size: 13.5px; margin-bottom: 8px; color: var(--primary-deep);">Operator Statutory Declaration:</h4>
+              <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5;">
+                I certify under NUPRC measurement-based reporting directives that all underlying operating evidence records have been inspected and approved, and that all deterministic factor mappings comply with IPCC Tier 2 standards.
+              </p>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 12px;">
+              <button class="btn btn-secondary" onclick="switchView('view-compiler')">&larr; Back to Compiler</button>
+              <button class="btn btn-primary" id="btn-confirm-submit-review">
+                <span>Confirm &amp; Submit for Review &rarr;</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ======================================================= -->
+  <!-- MODALS                                                  -->
+  <!-- ======================================================= -->
+
+  <!-- Modal 1: Create Facility Modal (E1 Validation) -->
+  <div class="modal-overlay" id="modal-create-facility">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="font-size: 1.1rem;">Register Industrial Facility</h3>
+        <button class="btn btn-secondary btn-sm" id="btn-close-facility-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="facility-modal-error" class="alert-banner alert-danger" style="display: none;"></div>
+
+        <div class="form-group">
+          <label class="form-label">Facility Name *</label>
+          <input type="text" class="form-input" id="inp-facility-name" placeholder="e.g. Delta-1 Flow Station &amp; Terminal">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Facility Classification * (E1 Required)</label>
+          <select class="form-select" id="inp-facility-type">
+            <option value="">-- Select Classification --</option>
+            <option value="Upstream Oil &amp; Gas Flow Station">Upstream Oil &amp; Gas Flow Station</option>
+            <option value="Offshore FPSO / Production Platform">Offshore FPSO / Production Platform</option>
+            <option value="Crude Oil Export Terminal">Crude Oil Export Terminal</option>
+            <option value="Gas Processing Plant">Gas Processing Plant</option>
+            <option value="Cement Manufacturing Facility">Cement Manufacturing Facility</option>
+            <option value="Commercial Thermal Power Plant">Commercial Thermal Power Plant</option>
+          </select>
+          <div class="form-help">NUPRC regulatory boundary designation.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Operational Boundaries *</label>
+          <textarea class="form-textarea" id="inp-facility-boundaries" rows="2" placeholder="e.g. Wellhead headers, separation train, gas flare stack, genset bank"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Reporting Period *</label>
+          <input type="text" class="form-input" id="inp-facility-period" value="Q3 2026" placeholder="e.g. Q3 2026">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">State / Jurisdiction</label>
+          <select class="form-select" id="inp-facility-state">
+            <option value="Rivers State (Port Harcourt)">Rivers State (Port Harcourt)</option>
+            <option value="Delta State (Warri)">Delta State (Warri)</option>
+            <option value="Akwa Ibom State (Eket)">Akwa Ibom State (Eket)</option>
+            <option value="Bayelsa State (Yenagoa)">Bayelsa State (Yenagoa)</option>
+            <option value="Lagos State">Lagos State</option>
+            <option value="Edo State">Edo State</option>
+            <option value="Ondo State">Ondo State</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btn-cancel-facility-modal">Cancel</button>
+        <button class="btn btn-primary" id="btn-submit-facility-modal">Create Facility Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Edit Extraction Modal (H4 / AC 1) -->
+  <div class="modal-overlay" id="modal-edit-extraction">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="font-size: 1.1rem;">Edit Extracted Value &amp; Approve</h3>
+        <button class="btn btn-secondary btn-sm" id="btn-close-edit-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="edit-record-id">
+        
+        <div class="alert-banner alert-info" style="margin-bottom: 16px;">
+          <span><strong>Audited Change:</strong> Your name (<span id="edit-modal-actor-display">Operator</span>) and timestamp will be permanently appended to the immutable audit trail.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Field Name</label>
+          <input type="text" class="form-input" id="edit-field-name" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Original Extracted Value</label>
+          <input type="text" class="form-input" id="edit-orig-val" disabled>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Corrected Activity Value *</label>
+          <input type="number" step="any" class="form-input" id="edit-new-val" placeholder="Enter corrected numeric quantity">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Reason for Correction *</label>
+          <input type="text" class="form-input" id="edit-reason" placeholder="e.g. Calibrated from physical meter inspection log">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btn-cancel-edit-modal">Cancel</button>
+        <button class="btn btn-primary" id="btn-confirm-edit-save">Save &amp; Lock Value</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Return Extraction Modal (H4 / U1) -->
+  <div class="modal-overlay" id="modal-return-extraction">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="font-size: 1.1rem;">Return Evidence Record</h3>
+        <button class="btn btn-secondary btn-sm" id="btn-close-return-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="return-record-id">
+        <p style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 14px;">
+          Returning this record marks it as <strong>Needs re-upload</strong>. Re-entry path: replace with clear scan or enter verified activity data manually.
+        </p>
+        <div class="form-group">
+          <label class="form-label">Return Reason *</label>
+          <select class="form-select" id="return-reason-select">
+            <option value="Illegible scan — thermal paper faded">Illegible scan — thermal paper faded</option>
+            <option value="Incomplete meter timestamps or gaps">Incomplete meter timestamps or gaps</option>
+            <option value="Meter tag mismatch with facility boundary">Meter tag mismatch with facility boundary</option>
+            <option value="Missing authorized signature on delivery invoice">Missing authorized signature on delivery invoice</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btn-cancel-return-modal">Cancel</button>
+        <button class="btn btn-danger" id="btn-confirm-return">Return Record</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Manual Entry Modal (E4 / F2 Fallback) -->
+  <div class="modal-overlay" id="modal-manual-entry">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="font-size: 1.1rem;">Manual Activity Entry Fallback</h3>
+        <button class="btn btn-secondary btn-sm" id="btn-close-manual-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="alert-banner alert-info" style="margin-bottom: 14px;">
+          <span>Used when scan is degraded (E4) or AI service is in degraded mode (F2). 100% human-verified.</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Source Document Reference *</label>
+          <input type="text" class="form-input" id="manual-doc-name" placeholder="e.g. Emergency Generator Run Log Photo #22">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Source / Emission Type *</label>
+          <select class="form-select" id="manual-source-type">
+            <option value="natural_gas_combustion">Natural Gas Combustion (m³)</option>
+            <option value="flaring_venting">Process &amp; Routine Flaring (m³)</option>
+            <option value="diesel_ago_generation" selected>Diesel (AGO) Gensets (Litres)</option>
+            <option value="grid_electricity">DisCo Grid Draw (kWh)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Field Description *</label>
+          <input type="text" class="form-input" id="manual-field-name" value="AGO Fuel Consumed" placeholder="e.g. AGO Fuel Consumed">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 12px;">
+          <div class="form-group">
+            <label class="form-label">Quantity Value *</label>
+            <input type="number" step="any" class="form-input" id="manual-value" placeholder="e.g. 15200">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Unit *</label>
+            <input type="text" class="form-input" id="manual-unit" value="litres">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btn-cancel-manual-modal">Cancel</button>
+        <button class="btn btn-primary" id="btn-confirm-manual-save">Add &amp; Approve Entry</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: Duplicate Alert (F6) -->
+  <div class="modal-overlay" id="modal-duplicate-alert">
+    <div class="modal-dialog">
+      <div class="modal-header" style="background: var(--warning-bg);">
+        <h3 style="font-size: 1.1rem; color: var(--warning-text);">Probable Duplicate Evidence (F6)</h3>
+        <button class="btn btn-secondary btn-sm" id="btn-close-duplicate-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 13.5px; color: var(--text-secondary); margin-bottom: 14px;">
+          The system detected an identical SHA-256 cryptographic fingerprint matching an existing document in this facility:
+        </p>
+        <div style="background: #fafafa; padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--surface-border); font-size: 12.5px; margin-bottom: 16px;" id="duplicate-details-box">
+          <!-- Populated dynamically -->
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted);">
+          Per F6 failure recovery: you may discard this file to avoid double-counting emissions, or confirm keep as a secondary copy.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btn-duplicate-discard">Discard Duplicate</button>
+        <button class="btn btn-primary" id="btn-duplicate-keep">Keep Secondary Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 6: Tune Confidence Thresholds (U5) -->
+  <div class="modal-overlay" id="modal-thresholds">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="font-size: 1.1rem;">Configure Confidence Thresholds (U5)</h3>
+        <button class="btn btn-secondary btn-sm" id="btn-close-thresholds-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">
+          Per spec U5, extraction thresholds default to 90% (auto-suggest) and 70% (flag for manual inspection) and are configurable per facility.
+        </p>
+        <div class="form-group">
+          <label class="form-label">Auto-Suggest High Confidence (%)</label>
+          <input type="number" min="50" max="100" class="form-input" id="inp-threshold-suggest" value="90">
+          <div class="form-help">Extractions &ge; this score display with high confidence tags.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Review Flag Threshold (%)</label>
+          <input type="number" min="10" max="90" class="form-input" id="inp-threshold-flag" value="70">
+          <div class="form-help">Extractions &lt; this score are prominently flagged for operator review.</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="btn-cancel-thresholds-modal">Cancel</button>
+        <button class="btn btn-primary" id="btn-save-thresholds">Save Thresholds</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AUDIT DRAWER (Quick Access) -->
+  <div class="audit-drawer-overlay" id="audit-drawer-overlay"></div>
+  <aside class="audit-drawer" id="audit-drawer">
+    <div class="audit-drawer-header">
+      <div>
+        <h3 style="color: #fff; font-size: 1.1rem;">Immutable Audit Ledger</h3>
+        <div style="font-size: 11px; color: var(--accent-gold); letter-spacing: 0.08em; text-transform: uppercase;">
+          Hash-Linked &bull; Append-Only &bull; Traceable in &le;3 Clicks
+        </div>
+      </div>
+      <button class="btn btn-secondary btn-sm" id="btn-close-audit-drawer" style="color: #fff; border-color: rgba(255,255,255,0.3); background: transparent;">&times;</button>
+    </div>
+    <div class="audit-drawer-body">
+      <div style="font-size: 12.5px; color: var(--text-secondary); margin-bottom: 16px;">
+        Every user action, file ingestion, human approval, value correction, and calculation run is permanently cryptographically chained.
+      </div>
+      <div id="audit-timeline-container">
+        <!-- Dynamically Populated -->
+      </div>
+    </div>
+  </aside>
+
+  <!-- Client Application Logic -->
+  <script src="/js/app.js"></script>
+</body>
+</html>
