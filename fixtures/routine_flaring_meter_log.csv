@@ -1,0 +1,7 @@
+Date,Timestamp,Wellhead_ID,Routine_Flaring_m3,Combustion_Efficiency_Pct,Operator_Signoff
+2026-07-01,00:00:00,FL-01,4020,98.2,T.Adeyemi
+2026-07-02,00:00:00,FL-01,3980,98.0,T.Adeyemi
+2026-08-01,00:00:00,FL-01,4150,98.5,T.Adeyemi
+2026-08-15,00:00:00,FL-01,4200,98.1,T.Adeyemi
+2026-09-01,00:00:00,FL-01,4050,98.4,T.Adeyemi
+# TOTAL_Q3_VOLUME: 124500 m3
